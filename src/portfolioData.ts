@@ -2,6 +2,7 @@ export interface Project {
     title: string;
     description: string;
     link?: string;
+    githubRepo?: string;
 }
 
 export interface SkillGroup {
@@ -22,16 +23,20 @@ export const portfolioData = {
     projects: [
         {
             title: "Tuneshift",
-            description: "Spotify üzerindeki playlistleri YouTube Music'e aktarmak için geliştirilmiş kapsamlı bir web uygulaması."
-        },
-        {
-            title: "E-Commerce",
-            description: "Modern alışveriş deneyimi sunan, performans odaklı fullstack e-ticaret platformu."
+            description: "Spotify üzerindeki playlistleri YouTube Music'e aktarmak için geliştirilmiş kapsamlı bir web uygulaması.",
+            githubRepo: "kazmbasar/Tuneshift"
         },
         {
             title: "OtoMuhasebe",
-            description: "Otomobil tamir atölyeleri için özel olarak tasarlanmış; müşteri kayıt ve işlem takip odaklı ön muhasebe programı."
+            description: "Otomobil tamir atölyeleri için özel olarak tasarlanmış; müşteri kayıt ve işlem takip odaklı ön muhasebe programı.",
+            githubRepo: "kazmbasar/OtoMuhasebe"
+        },
+        {
+            title: "E-Commerce",
+            description: "Modern alışveriş deneyimi sunan, performans odaklı fullstack e-ticaret platformu.",
+            githubRepo: "kazmbasar/E-Commerce"
         }
+
     ] as Project[],
     skills: [
         { category: "Teknolojiler", items: ["C#", ".Net", "Angular", "TypeScript", "SQL"] },
@@ -40,9 +45,9 @@ export const portfolioData = {
     contact: {
         email: "kazmbasar@gmail.com",
         social: [
-            { name: "LinkedIn", url: "#" },
-            { name: "GitHub", url: "#" },
-            { name: "Twitter / X", url: "#" }
+            { name: "LinkedIn", url: "https://www.linkedin.com/in/kazmbasar/" },
+            { name: "GitHub", url: "https://github.com/kazmbasar" },
+            { name: "Twitter / X", url: "https://twitter.com/kazmbasar" }
         ] as SocialLink[]
     }
 };

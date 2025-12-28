@@ -1,5 +1,6 @@
 import './style.css'
 import { portfolioData } from './portfolioData'
+import { getReadmeImage } from './githubUtils'
 
 const renderApp = () => {
   const app = document.querySelector<HTMLDivElement>('#app')!;
@@ -30,8 +31,10 @@ const renderApp = () => {
         <h2>Seçili Projeler</h2>
         <div class="projects-grid">
           ${portfolioData.projects.map(p => `
-            <a href="${p.link || '#'}" class="project-card">
-              <div class="project-image-placeholder"></div>
+            <a href="${p.link || (p.githubRepo ? `https://github.com/${p.githubRepo}` : '#')}" target="_blank" class="project-card" ${p.githubRepo ? `data-repo="${p.githubRepo}"` : ''}>
+              <div class="project-image-container">
+                <div class="project-image-placeholder"></div>
+              </div>
               <h3>${p.title}</h3>
               <p>${p.description}</p>
             </a>
@@ -70,7 +73,35 @@ const renderApp = () => {
   `;
 
   setupAnimations();
+  loadProjectImages();
 };
+
+const loadProjectImages = async () => {
+  const cards = document.querySelectorAll('.project-card[data-repo]');
+  for (const card of cards) {
+    const repo = card.getAttribute('data-repo');
+    if (repo) {
+      // Fetch in parallel essentially, but we loop. 
+      // For better UX, maybe valid to do one by one or Promise.all if needed, 
+      // but loop is safer to not hammer API if logic changes to more complex calls.
+      // Actually, let's just call it and handle the promise result.
+      getReadmeImage(repo).then(imageUrl => {
+        if (imageUrl) {
+          const container = card.querySelector('.project-image-container');
+          if (container) {
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = 'Project Screenshot';
+            img.onload = () => img.classList.add('loaded');
+            container.appendChild(img);
+          }
+        }
+      });
+    }
+  }
+};
+
+
 
 const setupAnimations = () => {
   const observerOptions = {

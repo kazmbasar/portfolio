@@ -120,14 +120,42 @@ h2 {
   display: block;
 }
 
-.project-image-placeholder {
+.project-image-container {
   aspect-ratio: 16/10;
   background: var(--bg-soft);
   border: 1px solid var(--border);
   margin-bottom: 1.5rem;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  position: relative;
 }
 
+.project-image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-soft);
+  z-index: 1;
+}
+
+.project-image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-image-container img.loaded {
+  opacity: 1;
+}
+
+.project-card:hover .project-image-container img,
 .project-card:hover .project-image-placeholder {
   transform: scale(0.98);
 }
