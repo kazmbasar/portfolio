@@ -32,9 +32,9 @@ export const portfolioData = {
             githubRepo: "kazmbasar/OtoMuhasebe"
         },
         {
-            title: "E-Commerce",
-            description: "Modern alışveriş deneyimi sunan, performans odaklı fullstack e-ticaret platformu.",
-            githubRepo: "kazmbasar/E-Commerce"
+            title: "knowledge-base",
+            description: "Yapay Zeka Destekli Bilgi Bankası",
+            githubRepo: "kazmbasar/knowledge-base"
         }
 
     ] as Project[],
